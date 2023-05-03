@@ -48,6 +48,13 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <TabBarIcon name="book" color={color} />,
         }}
       />
+      <Tabs.Screen
+        name="write"
+        options={{
+          title: "Write a Story",
+          tabBarIcon: ({ color }) => <TabBarIcon name="pencil" color={color} />,
+        }}
+      />
     </Tabs>
   );
 }
