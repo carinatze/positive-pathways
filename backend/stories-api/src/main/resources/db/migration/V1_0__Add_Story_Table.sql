@@ -1,0 +1,4 @@
+CREATE TABLE story(
+    story_id VARCHAR(255) PRIMARY KEY,
+    text VARCHAR(1024)
+)

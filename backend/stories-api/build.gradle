@@ -1,0 +1,52 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath('org.yaml:snakeyaml:2.0')
+	}
+}
+
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.0.5'
+	id 'io.spring.dependency-management' version '1.1.0'
+	id 'io.freefair.lombok' version '6.1.0'
+	id "org.flywaydb.flyway" version "9.8.1"
+}
+
+group = 'com.positivepathways'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.flywaydb:flyway-core'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	compileOnly 'org.projectlombok:lombok:1.18.20'
+	annotationProcessor 'org.projectlombok:lombok:1.18.20'
+	implementation 'jakarta.persistence:jakarta.persistence-api:3.1.0'
+	implementation 'org.springframework.data:spring-data-commons:3.0.4'
+	runtimeOnly 'org.postgresql:postgresql'
+	implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+}
+
+def yamlFile = file("src/main/resources/application.yml")
+def yaml = new org.yaml.snakeyaml.Yaml()
+def appProps = yaml.load(new StringReader(yamlFile.text))
+
+flyway {
+	url = System.getenv("JDBC_URL") ?: appProps.spring.datasource.url
+	user = System.getenv("JDBC_USER") ?: appProps.spring.datasource.username
+	password = System.getenv("JDBC_PASSWORD") ?: appProps.spring.datasource.password
+	locations = [appProps.spring.flyway.locations]
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
