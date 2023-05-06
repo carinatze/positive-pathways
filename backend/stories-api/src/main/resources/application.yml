@@ -1,0 +1,10 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: jdbc:postgresql://localhost:5432/positive-pathways
+    username: postgres
+    password: password
+  flyway:
+    locations: classpath:db/migration
