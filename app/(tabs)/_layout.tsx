@@ -53,7 +53,7 @@ export default function TabLayout() {
         name="writing"
         options={{
           title: "Write",
-          tabBarIcon: ({ color }) => <TabBarIcon name="book" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="pencil" color={color} />,
         }}
       />
     </Tabs>
