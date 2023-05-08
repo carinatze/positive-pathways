@@ -1,40 +1,39 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Button, SafeAreaView, Alert } from "react-native";
 
 import EditScreenInfo from "../../components/EditScreenInfo";
 import { Text, View } from "../../components/Themed";
 
+const Separator = () => <View style={styles.separator}/>
+
 export default function TabTwoScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Write Your Story</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/stories.tsx" />
+    <SafeAreaView style={styles.container}>
+    <View>
+      <Text style={styles.title}>
+        Write Your Story:
+      </Text>
+      <Separator></Separator>
+      <View style={styles.fixToText}>
+        <Button
+          title="Add story"
+          onPress={() => Alert.alert('Left button pressed')}
+        />
+        <Button
+          title="Delete"
+          onPress={() => Alert.alert('Right button pressed')}
+        />
+      </View>
     </View>
-    
+
+    <Separator />
+    <View>
+      <Text style={styles.title}>
+        ENTER STORY 
+      </Text>
+    </View>
+  </SafeAreaView>
   );
-}
-
-function Sidebar() {
-  return (
-  
-  <div className="sidebar">
-      <div className="sidebar-header">
-        <h1>My Journals</h1>
-        <button>Add story</button>
-      </div>
-
-      <div className="sidebar-notes">
-        <div className="sidebar-note">
-          <div className="sidebar-note-title">
-            <strong>JOURNAL TITLE</strong>
-            <button>Delete</button>
-          </div>
-          <p>Preview of Journal</p>
-          <small className="note-preview">Last modified [date]</small>
-        </div>        
-      </div>
-    </div>
-  )
+    
 }
 
 const styles = StyleSheet.create({
